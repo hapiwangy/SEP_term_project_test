@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 import time
 
-def test13(randomgroupname: str, randomaccount: str, randompassword: str):
+def test15(randomgroupname: str, randomaccount: str, randompassword: str):
   driver = webdriver.Chrome()
   driver.get(r"http://127.0.0.1:5000")
   time.sleep(1)
@@ -24,20 +24,14 @@ def test13(randomgroupname: str, randomaccount: str, randompassword: str):
   login.click()
   time.sleep(2)
 
-  elements = driver.find_elements(By.NAME, 'deletebutton')
-  num1 = len(elements)
-
-  delete = driver.find_element(By.NAME, 'deletebutton')
-  delete.click()
-  time.sleep(1)
-
-  elements = driver.find_elements(By.NAME, 'deletebutton')
-  num2 = len(elements)
-
-  if num2 + 1 == num1:
-    driver.close()
-    return 0
-  else:
+  try:
+    message = driver.find_element(By.NAME, "deletepost")
     driver.close()
     return 1
 
+  except :
+    driver.close()
+    return 0
+
+if __name__ == '__main__':
+  print(test15())

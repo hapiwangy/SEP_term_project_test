@@ -49,6 +49,3 @@ def test11(randomgroupname: str, randomaccount: str, randompassword: str):
     
     driver.close()
     return 0
-
-if __name__ == "__main__":
-    print(main())

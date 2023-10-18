@@ -48,10 +48,18 @@ def test9(randomgroupname: str, randomaccount: str, randompassword: str, comment
     addNewComment = driver.find_element(By.NAME, 'addnewcomment')
     addNewComment.click()
     time.sleep(1)
+    # Add comment
+    newComment = driver.find_element(By.XPATH, '//*[@id="new-comment"]')
+    newComment.send_keys(f"{commentcontent} + i really like this one")
+    time.sleep(1)
 
+    # Click addnewcomment button
+    addNewComment = driver.find_element(By.NAME, 'addnewcomment')
+    addNewComment.click()
+    time.sleep(1)
     try:
         countCurrentComments = len(driver.find_elements(By.CLASS_NAME, 'card'))
-        assert countCurrentComments == countComments + 1
+        assert countCurrentComments == countComments + 2
     except Exception:
         return 1
     

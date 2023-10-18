@@ -11,6 +11,9 @@ from tests.test10 import test10
 from tests.test11 import test11
 from tests.test12 import test12
 from tests.test13 import test13
+from tests.test14 import test14
+from tests.test15 import test15
+from tests.test16 import test16
 from custom_function.account_generate import return_new_user_info, return_new_admin_info
 # admin 帳號(亂數) * 2
 first_admin = return_new_admin_info()
@@ -45,7 +48,7 @@ if __name__ == "__main__":
     do_the_test = \
     [
     # 測試1
-    test(first_admin['groupname'], first_admin['username'], first_admin['password']),
+    test(first_admin,second_admin),
     # 測試2
     test2(first_user['groupname'], first_user['username'], first_user['password']),
     # 測試3
@@ -64,12 +67,18 @@ if __name__ == "__main__":
     test9(first_user['groupname'], first_user['username'], first_user['password'], comments[0]),
     # 測試10
     test10(first_user['groupname'], first_user['username'], first_user['password'], things[0]),
-    # 測試11
-    test11(first_admin['groupname'], first_admin['username'], first_admin['password']),
-    # 測試12
+    # 測試12(刪除留言)
     test12(first_admin['groupname'], first_admin['username'], first_admin['password']),
-    # 測試13
-    test13(first_admin['groupname'], first_admin['username'], first_admin['password'])
+    # 測試11(刪除貼文)
+    test11(first_admin['groupname'], first_admin['username'], first_admin['password']),
+    # 測試14(改變顏色)
+    test14(first_admin['groupname'], first_admin['username'], first_admin['password']),
+    # 測試13(刪除記帳)
+    test13(first_admin['groupname'], first_admin['username'], first_admin['password']),
+    # 測試15
+    test15(second_admin['groupname'], second_admin['username'], second_admin['password']),
+    # 測試16
+    test16(second_admin['groupname'], first_admin['groupname']),
     ]
     # 總測試
     for i, dtt in enumerate(do_the_test):

@@ -44,8 +44,17 @@ def test8(randomgroupname: str, randomaccount: str, randompassword: str, postcon
     postButton.click()
     time.sleep(1)
 
+    # Post content
+    postContent = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/form/div/div[1]/textarea')
+    postContent.send_keys(postcontent+"omg so cool!")
+    time.sleep(1)
+
+    # Posting button
+    postButton = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/form/div/div[2]/button')
+    postButton.click()
+    time.sleep(1)
     try:
-        assert len(driver.find_elements(By.CLASS_NAME, 'card')) == cardNumber + 1
+        assert len(driver.find_elements(By.CLASS_NAME, 'card')) == cardNumber + 2
     except Exception:
         return 1
     
