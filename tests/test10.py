@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 import time
 
-def test8(randomgroupname: str, randomaccount: str, randompassword: str, postcontent: str):
+def test10(randomgroupname: str, randomaccount: str, randompassword: str, thing: dict):
     # Get webdriver
     driver = webdriver.Chrome()
     driver.maximize_window()
@@ -30,24 +30,34 @@ def test8(randomgroupname: str, randomaccount: str, randompassword: str, postcon
     time.sleep(2)
 
     # Test
-    # Card number before submitting post
-    card = driver.find_elements(By.CLASS_NAME, 'card')
-    cardNumber = len(card)
+    # Count cards before deleting post
+    rows = driver.find_element(By.CLASS_NAME, 'table').find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr')
+    countRows = len(rows)
 
-    # Post content
-    postContent = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/form/div/div[1]/textarea')
-    postContent.send_keys(postcontent)
+    # Fill date
+    date = driver.find_element(By.NAME, 'date')
+    date.send_keys(thing['date'])
+
+    # Fill thing
+    date = driver.find_element(By.NAME, 'thing')
+    date.send_keys(thing['thing'])
+
+    # Fill expense
+    date = driver.find_element(By.NAME, 'expense')
+    date.send_keys(thing['expense'])
     time.sleep(1)
 
-    # Posting button
-    postButton = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/form/div/div[2]/button')
-    postButton.click()
+    #Click addthing button
+    addThing = driver.find_element(By.NAME, 'addthing')
+    addThing.click()
     time.sleep(1)
 
     try:
-        assert len(driver.find_elements(By.CLASS_NAME, 'card')) == cardNumber + 1
+        countCurrentRows = len(driver.find_element(By.CLASS_NAME, 'table').find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr'))
+        assert countCurrentRows == countRows + 1
     except Exception:
         return 1
     
     driver.close()
     return 0
+

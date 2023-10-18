@@ -1,9 +1,11 @@
+# testcase 11
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 import time
 
-def test8(randomgroupname: str, randomaccount: str, randompassword: str, postcontent: str):
+def test11(randomgroupname: str, randomaccount: str, randompassword: str):
     # Get webdriver
     driver = webdriver.Chrome()
     driver.maximize_window()
@@ -24,30 +26,29 @@ def test8(randomgroupname: str, randomaccount: str, randompassword: str, postcon
     password.send_keys(randompassword)
     time.sleep(1)
 
-    # Click login button
+    # Click login button(login as admin)
     loginButton = driver.find_element(By.XPATH, '/html/body/div/div/div/div/div[2]/form/button[1]')
     loginButton.click()
     time.sleep(2)
 
     # Test
-    # Card number before submitting post
-    card = driver.find_elements(By.CLASS_NAME, 'card')
-    cardNumber = len(card)
+    # Count cards before deleting post
+    cards = driver.find_elements(By.CLASS_NAME, 'card')
+    countCards = len(cards)
 
-    # Post content
-    postContent = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/form/div/div[1]/textarea')
-    postContent.send_keys(postcontent)
-    time.sleep(1)
-
-    # Posting button
-    postButton = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/form/div/div[2]/button')
-    postButton.click()
-    time.sleep(1)
+    # Delete post button
+    deletepost = driver.find_elements(By.NAME, 'deletepost')[-1]
+    deletepost.click()
+    time.sleep(10)
 
     try:
-        assert len(driver.find_elements(By.CLASS_NAME, 'card')) == cardNumber + 1
+        countCurrentCards = len(driver.find_elements(By.CLASS_NAME, 'card'))
+        assert countCurrentCards == countCards - 1
     except Exception:
         return 1
     
     driver.close()
     return 0
+
+if __name__ == "__main__":
+    print(main())

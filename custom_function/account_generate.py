@@ -1,16 +1,16 @@
 import random
 import string
 
-def generate_username(length=7):
+def generate_username(length=10):
     characters = string.ascii_letters + string.digits
     return "A" + ''.join(random.choice(characters) for _ in range(length))
 
-def generate_groupname(length=7):
+def generate_groupname(length=10):
     characters = string.ascii_letters
     return "A" + ''.join(random.choice(characters) for _ in range(length))
 
-def generate_password(length=11):
-    characters = string.ascii_letters + string.digits + string.punctuation
+def generate_password(length=15):
+    characters = string.ascii_letters + string.digits
     return  "A" + ''.join(random.choice(characters) for _ in range(length))
 
 # 回傳一個新的admin
